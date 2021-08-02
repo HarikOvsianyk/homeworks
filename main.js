@@ -37,8 +37,8 @@ console.log(amountBox)
 
 //Four task
 const roomsOnFloor = 3;
-const floors = 9;
-const roomNumber = 456;
+const floors = 5;
+const roomNumber = 111;
 let flatsInPorch = roomsOnFloor*floors;
 let porchNumber = roomNumber/flatsInPorch;
 if (porchNumber <1) {
