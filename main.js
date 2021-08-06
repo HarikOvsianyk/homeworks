@@ -22,7 +22,7 @@ console.log(employeeObj.getFullName());
 let createEmployeesFromArr = (arr) => {
     let newArr = [];
     for( i = 0; i < arr.length; i++) {
-        newArr.push(arr[i]);
+        newArr.push(new Emploee(arr[i]));
     }
     return newArr;
 };
@@ -38,4 +38,5 @@ const getFullNamesFromArr = (arr) => {
     return names;
 }
 
-console.log(getFullNamesFromArr(emplyeeConstructArr));
+console.log(getFullNamesFromArr(employeeConstructArr));
+  
