@@ -39,4 +39,22 @@ const getFullNamesFromArr = (arr) => {
 }
 
 console.log(getFullNamesFromArr(employeeConstructArr));
+
+//Five task
+const getMiddleSalary = (arr) => {
+    let res = 0;
+    for (i = 0; i < arr.length; i ++) {
+        res += arr[i].salary;
+    }
+    return avg = res/arr.length;
+};
+
+console.log(getMiddleSalary(employeeConstructArr));
+
+//Six task
+const getRandomEmployee = (arr) => {
+    return arr[Math.round(Math.random() * arr.length)];
+    }
+    
+console.log(getRandomEmployee(employeeConstructArr));
   
