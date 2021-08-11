@@ -60,3 +60,18 @@ if (floorNumber % 1 == 0) {
 }
 const floor = floorNumber;
 console.log(floor);
+
+//Five task
+
+const medianNumber = 8;
+function pyramid() {
+    let output = "";
+    for (let i = 1; i < medianNumber; i++) {
+        let star = "#".repeat(i*2 - 1);
+        let dashes = "_".repeat(medianNumber - i);
+        output += dashes + star + dashes + "\n";
+    }
+    console.log(output);
+}
+
+pyramid();
