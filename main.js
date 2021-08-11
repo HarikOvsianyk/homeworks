@@ -57,4 +57,6 @@ const getRandomEmployee = (arr) => {
     }
     
 console.log(getRandomEmployee(employeeConstructArr));
+
+//Seven task
   
