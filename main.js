@@ -10,7 +10,7 @@ function Emploee (employee) {
     this.gender = employee.gender;
 }
 
-const employeeObj = new Emploee(employeeArr[2]);
+const employeeObj = new Emploee(employeeArr[0]);
 console.log(employeeObj);
 
 //Second task
@@ -60,11 +60,11 @@ console.log(getRandomEmployee(employeeConstructArr));
 
 //Seven task
 
-Object.defineProperty(employeeObj, 'fullInfo', {
+Object.defineProperty(Emploee.prototype, 'fullInfo', {
     get: function() {
     let arr = [];
-    for (let key in employeeObj) {
-        arr.push(`${key} : ${employeeObj[key]}`)
+    for (let key in this) {
+        arr.push(`${key} : ${this[key]}`)
       }
     let newArr = arr.splice(7, arr.length);
     return arr.join(", ");
@@ -80,5 +80,6 @@ console.log(employeeObj);
 console.log(employeeObj.fullInfo);
 employeeObj.fullInfo = {name: 'Вася', salary: 9000};
 console.log(employeeObj);
+
 
 
