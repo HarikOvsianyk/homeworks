@@ -59,4 +59,26 @@ const getRandomEmployee = (arr) => {
 console.log(getRandomEmployee(employeeConstructArr));
 
 //Seven task
-  
+
+Object.defineProperty(employeeObj, 'fullInfo', {
+    get: function() {
+    let arr = [];
+    for (let key in employeeObj) {
+        arr.push(`${key} : ${employeeObj[key]}`)
+      }
+    let newArr = arr.splice(7, arr.length);
+    return arr.join(", ");
+    },
+    set: function(obj) {
+        for (let key in obj) {
+            this[key] = obj[key];
+        } 
+
+    }
+});
+console.log(employeeObj);
+console.log(employeeObj.fullInfo);
+employeeObj.fullInfo = {name: 'Вася', salary: 9000};
+console.log(employeeObj);
+
+
