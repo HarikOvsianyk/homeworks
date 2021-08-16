@@ -35,5 +35,25 @@ console.log(getUpdatedArr({name: 'Vasia'}));
 console.log(getUpdatedArr());
 console.log(getUpdatedArr(4));
 
+//Third task
 
+function getFirstTime() {
+  let start = 0;
+  let id = 0;
+  return function() {
+    if (id == 0) {
+      console.log("Enabled")
+    } else {
+      id ++;
+      start = new Date().getSeconds();
+      return start;
+    }
+
+  } 
+}
+
+const getTime = getFirstTime();
+console.log(getItem());
+
+  
 
