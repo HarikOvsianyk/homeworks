@@ -24,4 +24,14 @@ function getAllKeys(obj) {
 
 console.log(getAllKeys(obj));
 
+//Task 3
 
+function getAllValues(obj) {
+    let arr = [];
+    for (let key in obj) {
+        arr.push(obj[key]);
+    }
+    return arr;
+}
+
+console.log(getAllValues(obj));
