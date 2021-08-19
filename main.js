@@ -86,5 +86,19 @@ function getCompanyNames(arr) {
 
 console.log(getCompanyNames(condidateArr));
 
+//Task 7
+
+function getUserByYear(year) {
+    let idArr = [];
+    let oldArr = [...condidateArr];
+    for (let i = 0; i < oldArr.length; i ++) {
+        if (oldArr[i].registered.split('-')[0] == year) {
+            idArr.push(oldArr[i]._id);
+        };
+    }
+    return idArr;
+}
+
+console.log(getUserByYear(2017));
 
 
