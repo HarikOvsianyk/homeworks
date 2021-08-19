@@ -35,3 +35,26 @@ function getAllValues(obj) {
 }
 
 console.log(getAllValues(obj));
+
+//Task 4
+
+const condidateArr = [{id: 1,name: 'Kolya'}, {id: 2, name: 'Petya'}];
+
+const obj1 = {
+    id: 3,
+    name: 'Vasya'
+};
+
+const secondObj = {
+    id: 4,
+    name: 'Katya'
+};
+
+function insertIntoArr(obj, id) {
+    condidateArr.splice(id - 1, 0 , obj);
+    return condidateArr;
+}
+
+console.log(insertIntoArr(obj1, 2));
+console.log(insertIntoArr(secondObj, 1));
+
