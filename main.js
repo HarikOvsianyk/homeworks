@@ -62,10 +62,10 @@ console.log(insertIntoArr(secondObj, 1));
 
 class Condidate {
     constructor(condidate) {
-        this.condidate = condidate;
+        Object.assign(this, condidate)
     }
     getState() {
-        return this.condidate.address.split(',')[2]
+        return this.address.split(',')[2]
     }
 }
 
