@@ -101,4 +101,17 @@ function getUserByYear(year) {
 
 console.log(getUserByYear(2017));
 
+//Task 8
 
+function getCondidatesByUnreadMsg(num) {
+    let arrFromSort = [];
+    let oldArr = [...condidateArr];
+    for (let i = 0; i < oldArr.length; i ++) {
+        if( oldArr[i].greeting.split(' ')[5] == num) {
+            arrFromSort.push(new Condidate(oldArr[i]));
+        }
+    }
+    return arrFromSort;
+}
+
+console.log(getCondidatesByUnreadMsg(8));
