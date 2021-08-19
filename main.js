@@ -38,7 +38,7 @@ console.log(getAllValues(obj));
 
 //Task 4
 
-const condidateArr = [{id: 1,name: 'Kolya'}, {id: 2, name: 'Petya'}];
+const condidateArr1 = [{id: 1,name: 'Kolya'}, {id: 2, name: 'Petya'}];
 
 const obj1 = {
     id: 3,
@@ -51,10 +51,26 @@ const secondObj = {
 };
 
 function insertIntoArr(obj, id) {
-    condidateArr.splice(id - 1, 0 , obj);
-    return condidateArr;
+    condidateArr1.splice(id - 1, 0 , obj);
+    return condidateArr1;
 }
 
 console.log(insertIntoArr(obj1, 2));
 console.log(insertIntoArr(secondObj, 1));
+
+//Task 5
+
+class Condidate {
+    constructor(condidate) {
+        this.condidate = condidate;
+    }
+    getState() {
+        return this.condidate.address.split(',')[2]
+    }
+}
+
+const condidate = new Condidate(condidateArr[0]);
+console.log(condidate);
+console.log(condidate.getState());
+
 
