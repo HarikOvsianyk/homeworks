@@ -115,3 +115,18 @@ function getCondidatesByUnreadMsg(num) {
 }
 
 console.log(getCondidatesByUnreadMsg(8));
+
+//Task 9
+
+function getCondidatesByGender(gender) {
+    let arrFromSort = [];
+    let oldArr = [...condidateArr];
+    for (let i = 0; i < oldArr.length; i ++) {
+        if( oldArr[i].gender == gender) {
+            arrFromSort.push(new Condidate(oldArr[i]));
+        }
+    }
+    return arrFromSort;
+}
+
+console.log(getCondidatesByGender('male'));
