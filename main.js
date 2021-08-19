@@ -73,4 +73,18 @@ const condidate = new Condidate(condidateArr[0]);
 console.log(condidate);
 console.log(condidate.getState());
 
+//Task 6
+
+function getCompanyNames(arr) {
+    let newArr = [];
+    for (let i = 0; i < arr.length; i ++) {
+        newArr.push(arr[i].company);
+    }
+    let uniqArray = [...new Set(newArr)];
+    return uniqArray;
+}
+
+console.log(getCompanyNames(condidateArr));
+
+
 
