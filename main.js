@@ -3,10 +3,9 @@
 //Task 1
 
 function searchCandidatesByPhoneNumber(phone) {
-    phone = phone.match(/\d/gi).join('');
-    return condidateArr.filter(el => el.phone.match(/\d/gi).join('').includes(phone));
+    return condidateArr.filter(el => el.phone.match(/\d/gi).join('').includes(phone.match(/\d/gi).join('')));
 }
-console.log(searchCandidatesByPhoneNumber('+1 (803) 433-2863'));
+console.log(searchCandidatesByPhoneNumber('43'));
 
 
 /* как вариант для поиска с пробелами
@@ -33,8 +32,7 @@ function sortCandidatesArr(sortBy) {
     const up   = 'asc',
           down = 'desc';
     condidateArr.forEach(el => {
-        let balance = el.balance.match(/\d/gi).join('');
-        el.balance = balance;
+        el.balance = el.balance.match(/\d/gi).join('');
     });
 
     if( sortBy == up) {
@@ -52,7 +50,7 @@ function sortCandidatesArr(sortBy) {
     }
 }
 
-console.log(sortCandidatesArr());
+console.log(sortCandidatesArr('asc'));
 
 
 
