@@ -8,6 +8,15 @@ function searchCandidatesByPhoneNumber(phone) {
 }
 console.log(searchCandidatesByPhoneNumber('+1 (803) 433-2863'));
 
+
+/* как вариант для поиска с пробелами
+function searchCandidatesByPhoneNumber(phone) {
+    return condidateArr.filter(el => el.phone.includes(phone));
+}
+console.log(searchCandidatesByPhoneNumber('+1 (803) 433-2863'));
+*/
+
+
 //Task 2
 
 function getCandidateById(id) {
@@ -43,7 +52,7 @@ function sortCandidatesArr(sortBy) {
     }
 }
 
-console.log(sortCandidatesArr('asc'));
+console.log(sortCandidatesArr());
 
 
 
