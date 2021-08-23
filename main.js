@@ -2,13 +2,10 @@
 
 //Task 1
 
-function searchCandidatesByPhoneNumber(num) {
-    let arr = [...condidateArr];
-    for ( let i = 0; i <= arr.length; i ++) {
-        if(arr[i].phone == num) {
-            return arr[i];
-        }
-    }
+function searchCandidatesByPhoneNumber(phone) {
+    phone = phone.match(/\d/gi).join('');
+    return condidateArr.filter(el => el.phone.match(/\d/gi).join('').includes(phone));
 }
+console.log(searchCandidatesByPhoneNumber('43'));
 
-console.log(searchCandidatesByPhoneNumber("+1 (803) 433-2863"));
+
