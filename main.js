@@ -52,7 +52,15 @@ console.log(getNameOfDay('en', 3));
 //Fourth task
 const arr1 = [12, 898, 899, 900];
 function getSum(arr) {
-    return arr.slice().sort((a, b) => a - b).slice(0,2).reduce((a,b) => a + b);
+    if (arr.length < 4) {
+        console.log('Длинна массива должна быть не менее 4');
+    } else if(!(arr.every(item => Number.isInteger(item)))) {
+        return console.log('Введите целое число!');
+    } else if (!(arr.every(item => item > 0))) {
+        return console.log('Введите положительное число!')
+    } else {
+        return arr.slice().sort((a, b) => a - b).slice(0,2).reduce((a,b) => a + b);
+    } 
 }
 console.log(getSum(arr1));
 //Fifth task
