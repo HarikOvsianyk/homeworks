@@ -3,11 +3,11 @@
 let arr = ['Buz', 'Fiz', 'FizBuz'];
 
 for (i = 1; i <= 10; i++) {
-    if (i % 3 == 0) {
+    if (!(i % 3)) {
         console.log(arr[2])
-    } else if (i % 2 !== 0) {
+    } else if (i % 2) {
         console.log(arr[0])
-    } else if (i % 2 == 0) {
+    } else if (!(i % 2)) {
         console.log(arr[1])
     }
 }
@@ -27,9 +27,9 @@ const consumptionPerWeek = 1200;
 const weeksAmount = 8;
 
 let amountBox = (consumptionPerWeek / sheetsInReamPaper) * weeksAmount;
-if (amountBox % 1 == 0) {
+if (!(amountBox % 1)) {
     amountBox;
-} else if (amountBox % 1 !== 0) {
+} else if (amountBox % 1) {
     amountBox = amountBox - (amountBox % 1) + 1;
 }
 
@@ -43,9 +43,9 @@ let flatsInPorch = roomsOnFloor*floors;
 let porchNumber = roomNumber/flatsInPorch;
 if (porchNumber <1) {
     porchNumber = 1;
-} else if (porchNumber % 1 == 0) {
+} else if (!(porchNumber % 1)) {
     porchNumber;
-} else if (porchNumber % 1 !== 0) {
+} else if (porchNumber % 1) {
     porchNumber = porchNumber - (porchNumber % 1) + 1;
 }
 
@@ -53,9 +53,9 @@ const porch = porchNumber;
 
 console.log(porch);
 let floorNumber = ((roomNumber - ((porch -1)*(flatsInPorch)))/roomsOnFloor);
-if (floorNumber % 1 == 0) {
+if (!(floorNumber % 1)) {
     floorNumber;
-} else if (floorNumber % 1 !== 0) {
+} else if (floorNumber % 1) {
     floorNumber = floorNumber - (floorNumber % 1) + 1;
 }
 const floor = floorNumber;
