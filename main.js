@@ -15,11 +15,7 @@ console.log(arr);
 const obj = { name: 'Vasya', age: 1};
 
 function getAllKeys(obj) {
-    let arr = [];
-    for (let key in obj) {
-        arr.push(key);
-    }
-    return arr;
+    return Object.keys(obj);
 }
 
 console.log(getAllKeys(obj));
@@ -27,11 +23,7 @@ console.log(getAllKeys(obj));
 //Task 3
 
 function getAllValues(obj) {
-    let arr = [];
-    for (let key in obj) {
-        arr.push(obj[key]);
-    }
-    return arr;
+    return Object.values(obj);
 }
 
 console.log(getAllValues(obj));
@@ -76,10 +68,7 @@ console.log(condidate.getState());
 //Task 6
 
 function getCompanyNames(arr) {
-    let newArr = [];
-    for (let i = 0; i < arr.length; i ++) {
-        newArr.push(arr[i].company);
-    }
+    let newArr = arr.map(item => item.company);
     let uniqArray = [...new Set(newArr)];
     return uniqArray;
 }
@@ -89,13 +78,9 @@ console.log(getCompanyNames(condidateArr));
 //Task 7
 
 function getUserByYear(year) {
-    let idArr = [];
     let oldArr = [...condidateArr];
-    for (let i = 0; i < oldArr.length; i ++) {
-        if (oldArr[i].registered.split('-')[0] == year) {
-            idArr.push(oldArr[i]._id);
-        };
-    }
+    let newArr = oldArr.filter(item => item.registered.split('-')[0] == year);
+    let idArr = newArr.map(item => item._id);
     return idArr;
 }
 
@@ -104,13 +89,8 @@ console.log(getUserByYear(2017));
 //Task 8
 
 function getCondidatesByUnreadMsg(num) {
-    let arrFromSort = [];
     let oldArr = [...condidateArr];
-    for (let i = 0; i < oldArr.length; i ++) {
-        if( oldArr[i].greeting.split(' ')[5] == num) {
-            arrFromSort.push(new Condidate(oldArr[i]));
-        }
-    }
+    let arrFromSort = oldArr.filter(item => item.greeting.split(' ')[5] == num);
     return arrFromSort;
 }
 
@@ -119,14 +99,10 @@ console.log(getCondidatesByUnreadMsg(8));
 //Task 9
 
 function getCondidatesByGender(gender) {
-    let arrFromSort = [];
     let oldArr = [...condidateArr];
-    for (let i = 0; i < oldArr.length; i ++) {
-        if( oldArr[i].gender == gender) {
-            arrFromSort.push(new Condidate(oldArr[i]));
-        }
-    }
+    let arrFromSort = oldArr.filter(item => item.gender == gender);
     return arrFromSort;
 }
 
 console.log(getCondidatesByGender('male'));
+
