@@ -17,22 +17,25 @@ console.log(result);
 
 //Second task
 function getArray(number){
-    const amount = number;
-    const mainArr = [];
-    let arr = [];
-    for (i = 1; i <= amount; i++) {
-        if (i % 3 === 0) {
+    if (!(number%3)) {
+        const amount = number;
+        const mainArr = [];
+        let arr = [];
+        for (i = 1; i <= amount; i++) {
+            if (i % 3 === 0) {
+                arr[arr.length] = i;
+                mainArr[mainArr.length] = arr;
+                arr = [];
+                continue;
+            }
             arr[arr.length] = i;
-            mainArr[mainArr.length] = arr;
-            arr = [];
-            continue;
         }
-        arr[arr.length] = i;
-    }
-    return mainArr;
+        return mainArr;
+    } 
+    return console.log('Веедите число кратное 3')
 }
 
-console.log(getArray(9));
+console.log(getArray(300));
 
 //Third task
 const namesOfDays = {
@@ -40,13 +43,11 @@ const namesOfDays = {
     en: ['Monday', 'Tuesday', 'Wednesday', 'Thursday' , 'Friday', 'Saturday' , 'Sunday'],
 }
 
-function getNameOfDay(){
-    const lang = 'en';
-    const day = 7;
+function getNameOfDay(lang, day){
     return namesOfDays[lang][day-1];
 }
 
-console.log(getNameOfDay());
+console.log(getNameOfDay('en', 3));
 
 //Fourth task
 const arr1 = [12, 898, 899, 900];
