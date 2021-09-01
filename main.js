@@ -38,15 +38,14 @@ console.log(getUpdatedArr(4));
 //Third task
 
 function getFirstTime() {
-  let start = 0,
-      end = 0;
-      return function() {
+  let start = 0;
+    return function() {
     if (start === 0) {
       console.log("Enabled");
       start = new Date().getTime()/1000;
     } else {
-      end = Math.round(((new Date().getTime()/1000) - start));
-      start = new Date().getTime() / 1000;
+     let end = Math.round(((new Date().getTime()/1000) - start));
+         start = new Date().getTime() / 1000;
       return end;
     }
 
