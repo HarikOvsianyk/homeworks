@@ -26,11 +26,7 @@ class Student {
             this.listOfStudents.push(obj);
         }
         for (let i = 0; i < this.listOfStudents.length; i++) {
-          if (i <= 4) {
-          this.listOfStudents[i].isSelfPayment = false;
-          } else {
-          this.listOfStudents[i].isSelfPayment = true;
-          }
+            this.listOfStudents[i].isSelfPayment =  i > 4;
         }
     }
 }
