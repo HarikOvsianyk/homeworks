@@ -20,10 +20,7 @@ Emploee.prototype.getFullName = function() {
 console.log(employeeObj.getFullName());
 //Third task
 let createEmployeesFromArr = (arr) => {
-    let newArr = [];
-    for( i = 0; i < arr.length; i++) {
-        newArr.push(new Emploee(arr[i]));
-    }
+    let newArr = arr.map(item => new Emploee(item));
     return newArr;
 };
 
@@ -31,10 +28,7 @@ const employeeConstructArr = createEmployeesFromArr(employeeArr);
 console.log(employeeConstructArr);
 //Four task
 const getFullNamesFromArr = (arr) => {
-    let names = [];
-    for ( i = 0; i < arr.length; i++) {
-        names.push(arr[i].getFullName());
-    }
+    let names = arr.map(item => item.getFullName());
     return names;
 }
 
@@ -42,11 +36,8 @@ console.log(getFullNamesFromArr(employeeConstructArr));
 
 //Five task
 const getMiddleSalary = (arr) => {
-    let res = 0;
-    for (i = 0; i < arr.length; i ++) {
-        res += arr[i].salary;
-    }
-    return avg = res/arr.length;
+    let avg = arr.map(item => item.salary).reduce((sum,current) => sum + current);
+    return avg/arr.length;
 };
 
 console.log(getMiddleSalary(employeeConstructArr));
@@ -60,14 +51,10 @@ console.log(getRandomEmployee(employeeConstructArr));
 
 //Seven task
 
+
 Object.defineProperty(Emploee.prototype, 'fullInfo', {
     get: function() {
-    let arr = [];
-    for (let key in this) {
-        arr.push(`${key} : ${this[key]}`)
-      }
-    let newArr = arr.splice(7, arr.length);
-    return arr.join(", ");
+    return Object.entries(this).map(item => item.join(' - ')).join(', ');
     },
     set: function(obj) {
         for (let key in obj) {
