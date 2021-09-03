@@ -1,6 +1,6 @@
 'use strict';
 //Task 1
-/* const button = document.querySelector('.button');
+const button = document.querySelector('.button');
 let answer = +prompt('Введите любое целое число', 1);
 for (let i = 1; i <= answer; i++) {
     let input = document.createElement('input');
@@ -17,7 +17,7 @@ for (let i = 1; i <= answer; i++) {
         input.setAttribute('placeholder', 'some text')
     }
     button.before(input);
-} */
+}
 
 //Task 2
 
@@ -29,7 +29,8 @@ btn1.textContent = 'Start';
 btn2.textContent ='Stop';
 form.after(btn2);
 form.after(btn1);
-btn1.addEventListener('click', () => setInterval(clock, 1000));
+btn1.addEventListener('click', () => {timer = setInterval(clock, 1000);
+return});
 btn2.addEventListener('click', () => clearInterval(timer));
 function clock() {
     let timer = new Date().toLocaleTimeString();
