@@ -1,6 +1,7 @@
 'use strict';
 //Task 1
 const button = document.querySelector('.button');
+const style = document.querySelector('style');
 let answer = +prompt('Введите любое целое число', 1);
 for (let i = 1; i <= answer; i++) {
     let input = document.createElement('input');
@@ -10,6 +11,8 @@ for (let i = 1; i <= answer; i++) {
         input.classList.add('margin-zero');
     } 
     if (i%2) {
+        let newClass = document.createTextNode('.yellow{background-color: yellow;}');
+        style.append(newClass);
         input.classList.add('yellow');
     }
     if (!(i%3)) {
@@ -20,7 +23,6 @@ for (let i = 1; i <= answer; i++) {
 }
 
 //Task 2
-
 const form = document.querySelector('form');
 const h2 = document.createElement('h2');
 const btn1 = document.createElement('button');
@@ -34,8 +36,36 @@ return});
 btn2.addEventListener('click', () => clearInterval(timer));
 function clock() {
     let timer = new Date().toLocaleTimeString();
-    h2.innerHTML = `${timer}`;
+    h2.textContent = `${timer}`;
     form.after(h2);
 }
 let timer = setInterval(clock, 1000);
 
+//Task 3
+let newWrapper = document.createElement('div');
+newWrapper.id = 'wrapper';
+newWrapper.innerHTML = `
+<div id="footer">
+<h1>Footer</h1>
+</div>
+<div id="main">
+<p>I am first paragraph</p>
+<p>I am second paragraph</p>
+<p>I am last paragraph</p>
+</div>`
+btn2.after(newWrapper);
+
+function changeColor() {
+    let main = document.querySelector('#main')
+    let lastChild = main.lastElementChild;
+    lastChild.style.backgroundColor = "red";
+}
+
+changeColor();
+
+function changePlace() {
+    let footer = document.querySelector('#footer');
+    main.append(footer);
+}
+
+changePlace();
