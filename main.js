@@ -69,3 +69,44 @@ function changePlace() {
 }
 
 changePlace();
+
+
+//Task 4
+
+
+let div2 = document.createElement('div');
+div2.innerHTML = `
+<h1>Menu</h1> 
+<ul id="menu">
+<li>cocoa</li>
+<li>cappuccino</li>
+<li>smoothie</li>
+<li>matcha frappe</li>
+</ul>
+`
+newWrapper.after(div2);
+function getOl() {
+    let li = document.querySelector('li');
+    div2.addEventListener('click', (e) => {
+        if (e.target.className == 'active') {
+            e.target.removeAttribute('class');
+            e.target.removeChild(e.target.children[0]);
+        } else {
+            e.target.classList.add('active');
+            for (let key in INGREDIENTS) {
+                if (key == e.target.innerText) {
+                    let ol = document.createElement('ol');
+                    e.target.append(ol);
+                    INGREDIENTS[key].forEach((item) => {
+                        let li = document.createElement('li');
+                        li.innerText = `${item}`;
+                        ol.append(li);
+                    });
+                }
+            }
+        }
+
+    });
+}
+
+getOl();
