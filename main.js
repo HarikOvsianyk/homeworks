@@ -86,11 +86,12 @@ div2.innerHTML = `
 `
 newWrapper.after(div2);
 function getOl() {
-    let li = document.querySelector('li');
     div2.addEventListener('click', (e) => {
         if (e.target.className == 'active') {
             e.target.removeAttribute('class');
-            e.target.removeChild(e.target.children[0]);
+            /* e.target.removeChild(e.target.children[0]); */
+            let ol = document.querySelector('ol');
+            ol.remove();
         } else {
             e.target.classList.add('active');
             for (let key in INGREDIENTS) {
