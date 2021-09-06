@@ -2,7 +2,7 @@
 
 //Task 1
 
-const promise = new Promise((resolve, reject) => {
+/* const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
         let number = Math.floor(Math.random() * (6) + 1);  
         if ( number>=1 && number<=5) {
@@ -21,4 +21,37 @@ promise
         console.log(`Go ${number} steps`);
     }
 })
-.catch(err => console.log(err));
+.catch(err => console.log(err)); */
+
+//Task 2
+function goToShop() {
+    const products = ['apple', 'banana', 'watermelon','pineapple'];
+    return  Promise.resolve(products);
+}
+
+let getShop = goToShop();
+getShop
+.then((response) => {
+    if (response.length < 4) {
+        return Promise.reject('Too low products');
+    } else {
+        let getDinner = makeDinner();
+        getDinner
+        .then((response) => {
+            console.log(response);
+        })
+        .catch(error => {throw new Error('Something went wrong', 'Product Error')});
+    }
+})
+.catch(error => {throw new Error(error, 'Product Error')});
+
+function makeDinner() {
+   return new Promise((resolve,reject) => {
+        setTimeout(() => {
+            resolve('Bon Appetit');
+        },3000);
+        /* reject('Something went wrong') */
+    })
+};
+
+
