@@ -25,7 +25,7 @@ promise
 
 //Task 2
 function goToShop() {
-    const products = ['apple', 'banana', 'watermelon','pineapple'];
+    const products = ['apple', 'banana', 'watermelon', 'pineapple'];
     return  Promise.resolve(products);
 }
 
@@ -40,17 +40,17 @@ getShop
         .then((response) => {
             console.log(response);
         })
-        .catch(error => {throw new Error('Something went wrong', 'Product Error')});
+        .catch(error => {throw new Error(error, 'Product Error')});
     }
 })
-.catch(error => {throw new Error(error, 'Product Error')});
+.catch(error => {throw new Error(error)});
 
 function makeDinner() {
    return new Promise((resolve,reject) => {
         setTimeout(() => {
             resolve('Bon Appetit');
-        },3000);
-        /* reject('Something went wrong') */
+            reject('Something went wrong')
+        },3000)
     })
 };
 
