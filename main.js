@@ -62,13 +62,54 @@ ProductError.prototype = Error.prototype; */
 
 //Task 3
 let container = document.querySelector('.container');
+function getArray(...arr) {
+            let data = `https://rickandmortyapi.com/api/character/`+`${arr}`
+            fetch(data)
+        .then((response) =>
+            response.json())
+        .then((data) => {
+            container.innerHTML = '';
+            if (!(Array.isArray(data))) {
+                data.results.forEach(item => createCard(item))
+            } else {
+                data.forEach(item => createCard(item));
+            }          
+        });
+
+}
+getArray(1,2,3,4,5,6,7,8,9,10);
+
+function getFilter() {
+    let form = document.querySelector('.form-container');
+    form.addEventListener('click', (e) => {
+        if (e.target.id == 'male' || e.target.id == 'female') {
+            let arr = `?gender=${e.target.id}`;
+            getArray(arr);
+        }
+        if (e.target.id == 'alive' || e.target.id == 'dead') {
+            let arr = `?status=${e.target.id}`;
+            getArray(arr);
+        }
+    })
+
+}
+getFilter();
+
 function createCard(item) {
-    container.innerHTML += `<div class="card">
+    let classRes
+    if (item.status == 'Alive') {
+        classRes = 'live-status'
+    } 
+    if (item.status == 'Dead') {
+        classRes = 'live-status dead'
+    };
+    container.innerHTML += `
+<div class="card">
     <div class="card-info">
         <div class="title">
             <h1>${item.name}</h1>
             <div class="status">
-                <div class="live-status"></div>
+                <div class="${classRes}"></div>
                 <p>${item.species} - ${item.status}</p>
             </div>
         </div>
@@ -81,62 +122,4 @@ function createCard(item) {
     </div>
 </div>`;
 }
-
-function getArray(...arr) {
-    let characters = `https://rickandmortyapi.com/api/character/${arr}`;
-    fetch(characters)
-        .then((response) => response.json())
-        .then((data) => {
-            data.forEach(item =>  createCard(item));;
-        });
-
-}
-
-getArray(1,2,3,4,5,6,7,8,9,10);
-
-function getFilter() {
-    let male = document.querySelector('#male'),
-        female = document.querySelector('#female'),
-        alive = document.querySelector('#alive'),
-        dead = document.querySelector('#dead');
-    male.addEventListener('click',() => {
-        let characters = `https://rickandmortyapi.com/api/character/?gender=male`;
-        fetch(characters)
-            .then((response) => response.json())
-            .then((data) => {
-                container.innerHTML = '';
-                data.results.forEach(item =>  createCard(item));;
-            });
-    });
-    female.addEventListener('click',() => {
-        let characters = `https://rickandmortyapi.com/api/character/?gender=female`;
-        fetch(characters)
-            .then((response) => response.json())
-            .then((data) => {
-                container.innerHTML = '';
-                data.results.forEach(item =>  createCard(item));;
-            });
-    });
-    alive.addEventListener('click',() => {
-        let characters = `https://rickandmortyapi.com/api/character/?status=alive`;
-        fetch(characters)
-            .then((response) => response.json())
-            .then((data) => {
-                container.innerHTML = '';
-                data.results.forEach(item =>  createCard(item));;
-            });
-    });
-    dead.addEventListener('click',() => {
-        let characters = `https://rickandmortyapi.com/api/character/?status=dead`;
-        fetch(characters)
-            .then((response) => response.json())
-            .then((data) => {
-                container.innerHTML = '';
-                data.results.forEach(item =>  createCard(item));;
-            });
-    })
-}
-
-getFilter();
-
 
