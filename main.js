@@ -52,5 +52,33 @@ function sortCandidatesArr(sortBy) {
 console.log(sortCandidatesArr('asc'));
 
 
+//Task 4
+
+const eyeColors = condidateArr.map(cand => cand.eyeColor).filter((cand, i, arr) => arr.indexOf(cand) === i);
+console.log(eyeColors);
+
+const result = eyeColors.reduce((acc, eyeColor) => {
+    acc[eyeColor] = condidateArr.filter(cand => cand.eyeColor === eyeColor);
+    return acc;
+}, {});
+
+console.log(result);
+
+// получить имя и почту
+const result2 = condidateArr
+    .filter(cand => cand.age >=25 && cand.age <= 30)
+    .map(({name:fullName, email}) => ({fullName, email}));
+
+console.log(result2);
+
+//через reduce
+
+const result3 = condidateArr.reduce((acc, cand) => {
+    if (cand.age >=25 && cand.age <= 30) {
+        return [...acc, {cand}];
+    }
+    return acc;
+}, [])
+
 
 
