@@ -40,10 +40,10 @@ getShop
         .then((response) => {
             console.log(response);
         })
-        .catch(error => {throw new Error(error, 'Product Error')});
+        .catch(error => {throw new ProductError(error)});
     }
 })
-.catch(error => {throw new Error(error)});
+.catch(error => {throw new ProductError(error)});
 
 function makeDinner() {
    return new Promise((resolve,reject) => {
@@ -53,5 +53,11 @@ function makeDinner() {
         },3000)
     })
 };
+
+function ProductError(message) {
+    this.name = "ProducError";
+    this.message = message;
+  }
+ProductError.prototype = Error.prototype;
 
 
