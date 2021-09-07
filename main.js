@@ -24,7 +24,7 @@ promise
 .catch(err => console.log(err)); */
 
 //Task 2
-function goToShop() {
+/* function goToShop() {
     const products = ['apple', 'banana', 'watermelon', 'pineapple'];
     return  Promise.resolve(products);
 }
@@ -58,6 +58,38 @@ function ProductError(message) {
     this.name = "ProducError";
     this.message = message;
   }
-ProductError.prototype = Error.prototype;
+ProductError.prototype = Error.prototype; */
 
+//Task 3
 
+function getArray(...arr) {
+    let characters = `https://rickandmortyapi.com/api/character/${arr}`;
+    fetch(characters)
+        .then((response) => response.json())
+        .then((data) => {
+            let container = document.querySelector('.container');
+            data.forEach(item =>  createCard(item));;
+             function createCard(item) {
+                container.innerHTML += `<div class="card">
+                <div class="card-info">
+                    <div class="title">
+                        <h1>${item.name}</h1>
+                        <div class="status">
+                            <div class="live-status"></div>
+                            <p>${item.species} - ${item.status}</p>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <p>${item.location.name}</p>
+                    </div>
+                </div>
+                <div class="card-image">
+                    <img src="${item.image}" alt="Img">
+                </div>
+        </div>`;
+            }
+        });
+
+}
+
+getArray(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17);
