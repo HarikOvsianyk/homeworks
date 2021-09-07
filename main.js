@@ -61,35 +61,82 @@ function ProductError(message) {
 ProductError.prototype = Error.prototype; */
 
 //Task 3
+let container = document.querySelector('.container');
+function createCard(item) {
+    container.innerHTML += `<div class="card">
+    <div class="card-info">
+        <div class="title">
+            <h1>${item.name}</h1>
+            <div class="status">
+                <div class="live-status"></div>
+                <p>${item.species} - ${item.status}</p>
+            </div>
+        </div>
+        <div class="content">
+            <p>${item.location.name}</p>
+        </div>
+    </div>
+    <div class="card-image">
+        <img src="${item.image}" alt="Img">
+    </div>
+</div>`;
+}
 
 function getArray(...arr) {
     let characters = `https://rickandmortyapi.com/api/character/${arr}`;
     fetch(characters)
         .then((response) => response.json())
         .then((data) => {
-            let container = document.querySelector('.container');
             data.forEach(item =>  createCard(item));;
-             function createCard(item) {
-                container.innerHTML += `<div class="card">
-                <div class="card-info">
-                    <div class="title">
-                        <h1>${item.name}</h1>
-                        <div class="status">
-                            <div class="live-status"></div>
-                            <p>${item.species} - ${item.status}</p>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <p>${item.location.name}</p>
-                    </div>
-                </div>
-                <div class="card-image">
-                    <img src="${item.image}" alt="Img">
-                </div>
-        </div>`;
-            }
         });
 
 }
 
-getArray(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17);
+getArray(1,2,3,4,5,6,7,8,9,10);
+
+function getFilter() {
+    let male = document.querySelector('#male'),
+        female = document.querySelector('#female'),
+        alive = document.querySelector('#alive'),
+        dead = document.querySelector('#dead');
+    male.addEventListener('click',() => {
+        let characters = `https://rickandmortyapi.com/api/character/?gender=male`;
+        fetch(characters)
+            .then((response) => response.json())
+            .then((data) => {
+                container.innerHTML = '';
+                data.results.forEach(item =>  createCard(item));;
+            });
+    });
+    female.addEventListener('click',() => {
+        let characters = `https://rickandmortyapi.com/api/character/?gender=female`;
+        fetch(characters)
+            .then((response) => response.json())
+            .then((data) => {
+                container.innerHTML = '';
+                data.results.forEach(item =>  createCard(item));;
+            });
+    });
+    alive.addEventListener('click',() => {
+        let characters = `https://rickandmortyapi.com/api/character/?status=alive`;
+        fetch(characters)
+            .then((response) => response.json())
+            .then((data) => {
+                container.innerHTML = '';
+                data.results.forEach(item =>  createCard(item));;
+            });
+    });
+    dead.addEventListener('click',() => {
+        let characters = `https://rickandmortyapi.com/api/character/?status=dead`;
+        fetch(characters)
+            .then((response) => response.json())
+            .then((data) => {
+                container.innerHTML = '';
+                data.results.forEach(item =>  createCard(item));;
+            });
+    })
+}
+
+getFilter();
+
+
