@@ -59,7 +59,13 @@ ProductError.prototype = Error.prototype;
 
 //Task 3
 let container = document.querySelector('.container');
+
 function getArray(...arr) {
+            if (arr[0].length > 2) {
+                arr = arr;
+            } else if (arr.length == 1) {
+                arr = [0,...arr]
+            } // сделано, что бы был поиск по единственному id
             let data = `https://rickandmortyapi.com/api/character/`+`${arr}`
             fetch(data)
         .then((response) =>
