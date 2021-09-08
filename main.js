@@ -2,7 +2,7 @@
 
 //Task 1
 
-/* const promise = new Promise((resolve, reject) => {
+const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
         let number = Math.floor(Math.random() * (6) + 1);  
         if ( number>=1 && number<=5) {
@@ -21,10 +21,10 @@ promise
         console.log(`Go ${number} steps`);
     }
 })
-.catch(err => console.log(err)); */
+.catch(err => console.log(err));
 
 //Task 2
-/* function goToShop() {
+function goToShop() {
     const products = ['apple', 'banana', 'watermelon', 'pineapple'];
     return  Promise.resolve(products);
 }
@@ -35,13 +35,10 @@ getShop
     if (response.length < 4) {
         return Promise.reject('Too low products');
     } else {
-        let getDinner = makeDinner();
-        getDinner
-        .then((response) => {
-            console.log(response);
-        })
-        .catch(error => {throw new ProductError(error)});
+        return makeDinner();
     }
+})
+.then((response) => {console.log(response);
 })
 .catch(error => {throw new ProductError(error)});
 
@@ -57,8 +54,8 @@ function makeDinner() {
 function ProductError(message) {
     this.name = "ProducError";
     this.message = message;
-  }
-ProductError.prototype = Error.prototype; */
+}
+ProductError.prototype = Error.prototype;
 
 //Task 3
 let container = document.querySelector('.container');
@@ -66,16 +63,15 @@ function getArray(...arr) {
             let data = `https://rickandmortyapi.com/api/character/`+`${arr}`
             fetch(data)
         .then((response) =>
-            response.json())
+            response.json())   
         .then((data) => {
             container.innerHTML = '';
             if (!(Array.isArray(data))) {
                 data.results.forEach(item => createCard(item))
             } else {
                 data.forEach(item => createCard(item));
-            }          
+            }  
         });
-
 }
 getArray(1,2,3,4,5,6,7,8,9,10);
 
@@ -120,6 +116,6 @@ function createCard(item) {
     <div class="card-image">
         <img src="${item.image}" alt="Img">
     </div>
-</div>`;
+</div>`
 }
 
