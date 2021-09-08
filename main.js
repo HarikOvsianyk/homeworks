@@ -78,8 +78,7 @@ console.log(getCompanyNames(condidateArr));
 //Task 7
 
 function getUserByYear(year) {
-    let oldArr = [...condidateArr];
-    let newArr = oldArr.filter(item => item.registered.split('-')[0] == year);
+    let newArr = condidateArr.filter(item => item.registered.split('-')[0] == year);
     let idArr = newArr.map(item => item._id);
     return idArr;
 }
@@ -89,8 +88,7 @@ console.log(getUserByYear(2017));
 //Task 8
 
 function getCondidatesByUnreadMsg(num) {
-    let oldArr = [...condidateArr];
-    let arrFromSort = oldArr.filter(item => item.greeting.split(' ')[5] == num);
+    let arrFromSort = condidateArr.filter(item => item.greeting.split(' ')[5] == num);
     return arrFromSort;
 }
 
@@ -99,8 +97,7 @@ console.log(getCondidatesByUnreadMsg(8));
 //Task 9
 
 function getCondidatesByGender(gender) {
-    let oldArr = [...condidateArr];
-    let arrFromSort = oldArr.filter(item => item.gender == gender);
+    let arrFromSort = condidateArr.filter(item => item.gender == gender);
     return arrFromSort;
 }
 
