@@ -19,8 +19,16 @@ let cards = Array.from(timeSlot).map(item => item.id);
 arrayEvents.forEach(item => {
     cards.forEach(i => {
         if (i == item.start) {
-            console.log(item);
-           createEvent(item);
+            let card = document.getElementById(`${i}`);
+            let card__event = card.lastChild;
+            console.log(card__event);
+            let newDiv = document.createElement('div');
+            newDiv.className = 'card__1';
+            newDiv.innerHTML = `
+            <p>${item.title}</p>
+           `
+            card__event.after(newDiv);
+        
         }
     })
 })
@@ -28,7 +36,7 @@ arrayEvents.forEach(item => {
 
 
 function createEvent(item) {
-    let card__event = document.querySelector('.card__event');
+    
     card__event.innerHTML = `
     <p>${item.title}</p>
    `
