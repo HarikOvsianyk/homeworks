@@ -25,19 +25,8 @@ arrayEvents.forEach(item => {
         if (i != item.start) {
             let one = item.start%30;
             let two = item.start - one;
-            console.log(one);
             if (i == two) {
-                let card = document.getElementById(`${i}`);
-                let event = card.querySelector('.card__event');
-                let newEvent = document.createElement('div');
-                newEvent.className = 'event';
-                newEvent.style.maxwidth = `200px`;
-                newEvent.style.height = `${item.duration*4}px`;
-                newEvent.style.backgroundColor = '#E2ECF5';
-                newEvent.style.position = 'relative';
-                newEvent.style.top = `${one*4}px`;
-                newEvent.innerHTML = `<p>${item.title}</p>`;
-                event.append(newEvent);
+                createEventWithOutput(i,item,one);
             }
         }
     })
@@ -51,6 +40,23 @@ function createEvent(i,item) {
     newEvent.style.height = `${item.duration*4}px`;
     newEvent.style.width = `200px`;
     newEvent.style.backgroundColor = '#E2ECF5';
+    newEvent.style.border = '2px solid grey';
+    newEvent.innerHTML = `<p>${item.title}</p>`;
+    event.append(newEvent);
+}
+
+function createEventWithOutput (i,item,one) {
+    let card = document.getElementById(`${i}`);
+    let event = card.querySelector('.card__event');
+    let newEvent = document.createElement('div');
+    newEvent.className = 'event';
+    newEvent.style.width = `200px`;
+    newEvent.style.zIndex = '1';
+    newEvent.style.border = '2px solid grey';
+    newEvent.style.height = `${item.duration*4}px`;
+    newEvent.style.backgroundColor = '#E2ECF5';
+    newEvent.style.position = 'relative';
+    newEvent.style.top = `${one*4}px`;
     newEvent.innerHTML = `<p>${item.title}</p>`;
     event.append(newEvent);
 }
