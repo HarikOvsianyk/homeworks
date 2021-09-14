@@ -1,15 +1,15 @@
 'use strict';
 
 let arrayEvents = [
-    {start: 0, duration:15, title: "Exercise"},
-    {start: 25, duration:30, title: "Travel to work"},
-    {start: 30, duration:30, title: "Plan day"},
-    {start: 60, duration:15, title: "Review yesterday`s commits"},
-    {start: 100, duration:15, title: "Code review"},
-    {start: 180, duration:90, title: "Have lunch with John"},
-    {start: 360, duration:30, title: "Skype call"},
-    {start: 370, duration:45, title: "Follow up with designer"},
-    {start: 405, duration:30, title: "Push up branch"},
+    {start: 0, duration:15, title: "Exercise", color: '#E2ECF5'},
+    {start: 25, duration:30, title: "Travel to work", color: '#E2ECF5'},
+    {start: 30, duration:30, title: "Plan day", color:'#E2ECF5'},
+    {start: 60, duration:15, title: "Review yesterday`s commits", color:'#E2ECF5'},
+    {start: 100, duration:15, title: "Code review", color:'#E2ECF5'},
+    {start: 180, duration:90, title: "Have lunch with John", color:'#E2ECF5'},
+    {start: 360, duration:30, title: "Skype call", color:'#E2ECF5'},
+    {start: 370, duration:45, title: "Follow up with designer", color:'#E2ECF5'},
+    {start: 405, duration:30, title: "Push up branch", color:'#E2ECF5'},
 ];
 
 
@@ -24,10 +24,10 @@ function renderCalendar() {
                 }
         
                 if (i != item.start) {
-                    let one = item.start%30;
-                    let two = item.start - one;
-                    if (i == two) {
-                        createEventWithOutput(i,item,one);
+                    let remainder = item.start%30;
+                    let start = item.start - remainder;
+                    if (i == start) {
+                        createEvent(i,item,remainder);
                     }
                 }
             })
@@ -37,20 +37,7 @@ function renderCalendar() {
 renderCalendar();
 
 
-function createEvent(i,item) {
-    let card = document.getElementById(`${i}`);
-    let event = card.querySelector('.card__event');
-    let newEvent = document.createElement('div');
-    newEvent.className = 'event';
-    newEvent.style.height = `${item.duration*4}px`;
-    newEvent.style.width = `200px`;
-    newEvent.style.backgroundColor = '#E2ECF5';
-    newEvent.style.border = '2px solid grey';
-    newEvent.innerHTML = `<p>${item.title}</p>`;
-    event.append(newEvent);
-}
-
-function createEventWithOutput (i,item,one) {
+function createEvent (i,item,reminder = 0) {
     let card = document.getElementById(`${i}`);
     let event = card.querySelector('.card__event');
     let newEvent = document.createElement('div');
@@ -59,12 +46,17 @@ function createEventWithOutput (i,item,one) {
     newEvent.style.zIndex = '1';
     newEvent.style.border = '2px solid grey';
     newEvent.style.height = `${item.duration*4}px`;
-    newEvent.style.backgroundColor = '#E2ECF5';
+    newEvent.style.backgroundColor = item.color;
     newEvent.style.position = 'relative';
-    newEvent.style.top = `${one*4}px`;
+    newEvent.style.top = `${reminder*4}px`;
     newEvent.innerHTML = `<p>${item.title}</p>`;
     event.append(newEvent);
 };
+
+function cleanEvent() {
+    const cardsevent = document.querySelectorAll('.card__event');
+    let arr = Array.from(cardsevent).forEach(item => item.innerHTML = '');
+}
 
 function formEvent() {
     let form = document.forms.add;
@@ -73,6 +65,7 @@ function formEvent() {
         let timeForm = document.getElementById('time');
         let durationForm = document.getElementById('duration');
         let eventForm = document.getElementById('event');
+        let colorForm = document.getElementById('bg');
         let timeArr = timeForm.value.split(':');
         let durAmount = durationForm.value;
         function getStart(timeArr) {   
@@ -85,16 +78,19 @@ function formEvent() {
             return duration;
         }
 
+
+
         let start = getStart(timeArr);
         let durationVal = getDuration(durAmount);
 
         arrayEvents.push({
             start: start,
             duration: durationVal,
-            title: eventForm.value
+            title: eventForm.value,
+            color: colorForm.value
         });
         form.reset();
-        console.log(arrayEvents);
+        cleanEvent();
         renderCalendar();
     })
 
