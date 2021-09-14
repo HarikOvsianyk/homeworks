@@ -10,20 +10,21 @@
 <body>
     <div class="container">
         <div class="wrapper">
-            <div class="AddEvent-form">
-                <form name="add" action="#">
-                    <input type="time" id="time">
+            <div class="addEvent">
+                <p class="addEvent__label">Add your event</p>
+                <form name="add" action="#" class="addEvent__form">
+                    <input type="time" id="time" class="addEvent__time">
                     <!-- <input type="text" id="duration" placeholder="Enter duration"> -->
-                    <select name="select" id="duration">
+                    <select name="select" id="duration" class="addEvent__duration">
                         <option selected value="0">Choose duration in minutes</option>
                         <option value="15">15</option>
                         <option value="30">30</option>
                         <option value="45">45</option>
                         <option value="60">60</option>
                     </select>
-                    <input type="text" id="event" placeholder="Enter your event">
-                    <input type="color" id="bg" value="#ff0000">
-                    <input type="submit" id="btn"  value="Add new event">
+                    <input type="text" id="event" placeholder="Enter your event" class="addEvent__event">
+                    <input type="color" id="bg" value="#ff0000" class="addEvent__bg">
+                    <input type="submit" id="btn"  value="Add new event" class="addEvent__btn">
                 </form>
             </div>
             <div class="card" id="0">

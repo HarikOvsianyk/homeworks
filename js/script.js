@@ -26,8 +26,9 @@ function renderCalendar() {
                 if (i != item.start) {
                     let remainder = item.start%30;
                     let start = item.start - remainder;
+                    let zIndex = 1;
                     if (i == start) {
-                        createEvent(i,item,remainder);
+                        createEvent(i,item,remainder, zIndex);
                     }
                 }
             })
@@ -37,13 +38,13 @@ function renderCalendar() {
 renderCalendar();
 
 
-function createEvent (i,item,reminder = 0) {
+function createEvent (i,item,reminder = 0, zIndex = 0) {
     let card = document.getElementById(`${i}`);
     let event = card.querySelector('.card__event');
     let newEvent = document.createElement('div');
     newEvent.className = 'event';
     newEvent.style.width = `200px`;
-    newEvent.style.zIndex = '1';
+    newEvent.style.zIndex = zIndex;
     newEvent.style.border = '2px solid grey';
     newEvent.style.height = `${item.duration*4}px`;
     newEvent.style.backgroundColor = item.color;
@@ -53,7 +54,7 @@ function createEvent (i,item,reminder = 0) {
     event.append(newEvent);
 };
 
-function cleanEvent() {
+function cleanEvents() {
     const cardsevent = document.querySelectorAll('.card__event');
     let arr = Array.from(cardsevent).forEach(item => item.innerHTML = '');
 }
@@ -78,8 +79,6 @@ function formEvent() {
             return duration;
         }
 
-
-
         let start = getStart(timeArr);
         let durationVal = getDuration(durAmount);
 
@@ -90,13 +89,27 @@ function formEvent() {
             color: colorForm.value
         });
         form.reset();
-        cleanEvent();
+        cleanEvents();
         renderCalendar();
     })
-
-    
 }
 
 formEvent();
+
+function deleteEvent() {
+    const cardsevent = document.querySelectorAll('.card__event');
+    let arr =  Array.from(cardsevent);
+    arr.forEach(item => item.addEventListener('dblclick', (e) => {
+        let event = item.querySelector('.event');
+        console.log(event);
+        console.log(e.currentTarget.parentNode.id);
+        console.log(e.target.parentNode);
+        event.remove();
+
+    }));
+    
+};
+
+deleteEvent();
 
 
