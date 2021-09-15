@@ -33,6 +33,7 @@ function renderCalendar() {
                 }
             })
     })
+    deleteEvent();
 }
 
 renderCalendar();
@@ -96,7 +97,7 @@ function formEvent() {
             cleanEvents();
             renderCalendar();
             changeEvent();
-            deleteEvent();
+            /* deleteEvent(); */
         }
     })
 }
@@ -120,6 +121,7 @@ function deleteEvent() {
             });
         })
     })
+    changeEvent();
 };
 
 deleteEvent();
@@ -133,13 +135,14 @@ function changeEvent () {
         event.forEach(item => {
             item.addEventListener('click', (e) => {
                 let obj = arrayEvents.find(item => item.title == e.target.textContent);
+                let start = obj.start;
                 let index = arrayEvents.indexOf(obj);
                 arrayEvents.splice(index,1);
                 let timeForm = document.getElementById('time');
                 let durationForm = document.getElementById('duration');
                 let eventForm = document.getElementById('event');
                 let colorForm = document.getElementById('bg');
-                let start = obj.start;
+                
                 let minutes = start%30;
                 let allminutes = (start - minutes) + 480;
                 let leftOfminutes = allminutes%60;
