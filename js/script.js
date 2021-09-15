@@ -65,33 +65,39 @@ function formEvent() {
         e.preventDefault();
         let timeForm = document.getElementById('time');
         let durationForm = document.getElementById('duration');
-        let eventForm = document.getElementById('event');
-        let colorForm = document.getElementById('bg');
-        let timeArr = timeForm.value.split(':');
-        let durAmount = durationForm.value;
-        function getStart(timeArr) {   
-            let start = parseInt(timeArr[0])*60 + parseInt(timeArr[1]) - 480;
-            return start;
+        if (durationForm.value == 0) {
+            form.reset();
+            return
+        } else {
+            let eventForm = document.getElementById('event');
+            let colorForm = document.getElementById('bg');
+            let timeArr = timeForm.value.split(':');
+            let durAmount = durationForm.value;
+            function getStart(timeArr) {   
+                let start = parseInt(timeArr[0])*60 + parseInt(timeArr[1]) - 480;
+                return start;
+            }
+    
+            function getDuration(durAmount) {
+                let duration = parseInt(durAmount);
+                return duration;
+            }
+    
+            let start = getStart(timeArr);
+            let durationVal = getDuration(durAmount);
+    
+            arrayEvents.push({
+                start: start,
+                duration: durationVal,
+                title: eventForm.value,
+                color: colorForm.value
+            });
+            form.reset();
+            cleanEvents();
+            renderCalendar();
+            changeEvent();
+            deleteEvent();
         }
-
-        function getDuration(durAmount) {
-            let duration = parseInt(durAmount);
-            return duration;
-        }
-
-        let start = getStart(timeArr);
-        let durationVal = getDuration(durAmount);
-
-        arrayEvents.push({
-            start: start,
-            duration: durationVal,
-            title: eventForm.value,
-            color: colorForm.value
-        });
-        form.reset();
-        cleanEvents();
-        renderCalendar();
-        deleteEvent();
     })
 }
 
@@ -114,10 +120,41 @@ function deleteEvent() {
             });
         })
     })
-    
 };
 
 deleteEvent();
+
+function changeEvent () {
+    const cardsevent = document.querySelectorAll('.card__event');
+    let arr =  Array.from(cardsevent);
+    arr.forEach(item => {
+        let eventArr = item.querySelectorAll('.event');
+        let event = Array.from(eventArr);
+        event.forEach(item => {
+            item.addEventListener('click', (e) => {
+                let obj = arrayEvents.find(item => item.title == e.target.textContent);
+                let index = arrayEvents.indexOf(obj);
+                arrayEvents.splice(index,1);
+                let timeForm = document.getElementById('time');
+                let durationForm = document.getElementById('duration');
+                let eventForm = document.getElementById('event');
+                let colorForm = document.getElementById('bg');
+                let start = obj.start;
+                let minutes = start%30;
+                let allminutes = (start - minutes) + 480;
+                let leftOfminutes = allminutes%60;
+                let realHour = (allminutes - leftOfminutes)/60 + '';
+                let realMinutes = leftOfminutes + minutes + '';
+                timeForm.value = `${realHour.padStart(2,0)}:${realMinutes.padStart(2,0)}`;
+                durationForm.value = obj.duration;
+                eventForm.value = obj.title;
+                colorForm.value = obj.color;
+            });
+        })
+    })
+};
+
+changeEvent();
 
 
 
