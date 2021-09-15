@@ -91,6 +91,7 @@ function formEvent() {
         form.reset();
         cleanEvents();
         renderCalendar();
+        deleteEvent();
     })
 }
 
@@ -99,17 +100,24 @@ formEvent();
 function deleteEvent() {
     const cardsevent = document.querySelectorAll('.card__event');
     let arr =  Array.from(cardsevent);
-    arr.forEach(item => item.addEventListener('dblclick', (e) => {
-        let event = item.querySelector('.event');
-        console.log(event);
-        console.log(e.currentTarget.parentNode.id);
-        console.log(e.target.parentNode);
-        event.remove();
-
-    }));
+    arr.forEach(item => {
+        let eventArr = item.querySelectorAll('.event');
+        let event = Array.from(eventArr);
+        event.forEach(item => {
+            item.addEventListener('dblclick', (e) => {
+                let obj = arrayEvents.find(item => item.title == e.target.textContent);
+                let index = arrayEvents.indexOf(obj);
+                arrayEvents.splice(index,1);
+                item.remove();
+                cleanEvents();
+                renderCalendar();
+            });
+        })
+    })
     
 };
 
 deleteEvent();
+
 
 
