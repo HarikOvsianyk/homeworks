@@ -57,7 +57,8 @@ function createEvent (i,item,reminder = 0, zIndex = 0) {
     newEvent.style.backgroundColor = item.color;
     newEvent.style.position = 'relative';
     newEvent.style.top = `${reminder*4}px`;
-    newEvent.innerHTML = `<p>${item.title}</p>`;
+    newEvent.innerHTML = `<p class="event-text">${item.title}</p>`;
+    newEvent.style.overflow = 'hidden';
     event.append(newEvent);
 };
 
