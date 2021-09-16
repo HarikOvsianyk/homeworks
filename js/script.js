@@ -121,6 +121,10 @@ function changeEvent() {
     let arr =  Array.from(cardsevent);
     arr.forEach(item => {
         item.addEventListener('click', (e) => {
+            document.querySelector('.scroll-to').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
             let form = document.forms.add;
             let timeForm = document.getElementById('time');
             let durationForm = document.getElementById('duration');
@@ -178,8 +182,6 @@ function showNotification() {
             let start = parseInt(timeArr[0])*60 + parseInt(timeArr[1]) - 480;
             return start;
         }
-    
-    
         let start = getStart(timeArr);
         arrayEvents.forEach(item => {
             if (item.start == start) {
@@ -190,6 +192,10 @@ function showNotification() {
 }
 
 showNotification();
+
+
+
+
 
 
 
