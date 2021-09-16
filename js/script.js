@@ -1,4 +1,9 @@
 'use strict';
+let btn2 = document.createElement('input');
+btn2.setAttribute('type', 'submit');
+btn2.setAttribute('id', 'btn2');
+btn2.setAttribute('value', 'Delete');
+btn2.setAttribute('class', 'addEvent__btn');
 
 let arrayEvents = [
     {start: 0, duration:15, title: "Exercise", color: '#E2ECF5'},
@@ -33,7 +38,6 @@ function renderCalendar() {
                 }
             })
     })
-    deleteEvent();
 }
 
 renderCalendar();
@@ -44,9 +48,11 @@ function createEvent (i,item,reminder = 0, zIndex = 0) {
     let event = card.querySelector('.card__event');
     let newEvent = document.createElement('div');
     newEvent.className = 'event';
-    newEvent.style.width = `200px`;
+    newEvent.style.width = '100%';
+    newEvent.style.maxwidth = `200px`;
     newEvent.style.zIndex = zIndex;
-    newEvent.style.border = '2px solid grey';
+    newEvent.style.fontSize = '14px';
+    newEvent.style.borderLeft = '2px solid #6E9ECF';
     newEvent.style.height = `${item.duration*4}px`;
     newEvent.style.backgroundColor = item.color;
     newEvent.style.position = 'relative';
@@ -61,8 +67,9 @@ function cleanEvents() {
 }
 
 function formEvent() {
-    let form = document.forms.add;
-    form.addEventListener('submit', (e) => {
+    let btn = document.getElementById('btn');
+    btn.addEventListener('click', (e) => {
+        let form = document.forms.add;
         e.preventDefault();
         let timeForm = document.getElementById('time');
         let durationForm = document.getElementById('duration');
@@ -70,6 +77,10 @@ function formEvent() {
             form.reset();
             return
         } else {
+            let label = document.querySelector('.addEvent__label');
+            label.innerText = 'Add your event';
+            let btn = document.getElementById('btn');
+            btn.setAttribute('value', 'Add event');
             let eventForm = document.getElementById('event');
             let colorForm = document.getElementById('bg');
             let timeArr = timeForm.value.split(':');
@@ -94,70 +105,70 @@ function formEvent() {
                 color: colorForm.value
             });
             form.reset();
+            btn2.remove();
             cleanEvents();
             renderCalendar();
-            changeEvent();
-            /* deleteEvent(); */
         }
     })
 }
 
 formEvent();
 
-function deleteEvent() {
+function changeEvent() {
     const cardsevent = document.querySelectorAll('.card__event');
     let arr =  Array.from(cardsevent);
     arr.forEach(item => {
-        let eventArr = item.querySelectorAll('.event');
-        let event = Array.from(eventArr);
-        event.forEach(item => {
-            item.addEventListener('dblclick', (e) => {
-                let obj = arrayEvents.find(item => item.title == e.target.textContent);
+        item.addEventListener('click', (e) => {
+            let form = document.forms.add;
+            let timeForm = document.getElementById('time');
+            let durationForm = document.getElementById('duration');
+            let eventForm = document.getElementById('event');
+            let colorForm = document.getElementById('bg');
+            let label = document.querySelector('.addEvent__label');
+            label.innerText = 'Change your event';
+            let btn = document.getElementById('btn');
+            btn.setAttribute('value', 'Change event');
+            form.append(btn2);
+            let obj = arrayEvents.find(item => {
+                if (item.title == e.target.textContent) {
+                    return item;
+                } else {
+                    return;
+                }
+            });
+            let start = obj.start;
+            let minutes = start%30;
+            let allminutes = (start - minutes) + 480;
+            let leftOfminutes = allminutes%60;
+            let realHour = (allminutes - leftOfminutes)/60 + '';
+            let realMinutes = leftOfminutes + minutes + '';
+            timeForm.value = `${realHour.padStart(2,0)}:${realMinutes.padStart(2,0)}`;
+            durationForm.value = obj.duration;
+            eventForm.value = obj.title;
+            colorForm.value = obj.color;
+            btn2.addEventListener('click', () => {
                 let index = arrayEvents.indexOf(obj);
-                arrayEvents.splice(index,1);
-                item.remove();
+                arrayEvents.splice(index,0);
                 cleanEvents();
+                form.reset();
+                let label = document.querySelector('.addEvent__label');
+                label.innerText = 'Add your event';
+                let btn = document.getElementById('btn');
+                btn.setAttribute('value', 'Add event');
+                btn2.remove();
                 renderCalendar();
-            });
+                return;
+            }) 
+            let index = arrayEvents.indexOf(obj);
+            arrayEvents.splice(index,1);
+            formEvent(); 
         })
     })
-    changeEvent();
-};
-
-deleteEvent();
-
-function changeEvent () {
-    const cardsevent = document.querySelectorAll('.card__event');
-    let arr =  Array.from(cardsevent);
-    arr.forEach(item => {
-        let eventArr = item.querySelectorAll('.event');
-        let event = Array.from(eventArr);
-        event.forEach(item => {
-            item.addEventListener('click', (e) => {
-                let obj = arrayEvents.find(item => item.title == e.target.textContent);
-                let start = obj.start;
-                let index = arrayEvents.indexOf(obj);
-                arrayEvents.splice(index,1);
-                let timeForm = document.getElementById('time');
-                let durationForm = document.getElementById('duration');
-                let eventForm = document.getElementById('event');
-                let colorForm = document.getElementById('bg');
-                
-                let minutes = start%30;
-                let allminutes = (start - minutes) + 480;
-                let leftOfminutes = allminutes%60;
-                let realHour = (allminutes - leftOfminutes)/60 + '';
-                let realMinutes = leftOfminutes + minutes + '';
-                timeForm.value = `${realHour.padStart(2,0)}:${realMinutes.padStart(2,0)}`;
-                durationForm.value = obj.duration;
-                eventForm.value = obj.title;
-                colorForm.value = obj.color;
-            });
-        })
-    })
-};
+}
 
 changeEvent();
+
+
 
 
 
