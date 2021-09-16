@@ -108,6 +108,7 @@ function formEvent() {
             form.reset();
             btn2.remove();
             cleanEvents();
+            showNotification();
             renderCalendar();
         }
     })
@@ -169,6 +170,26 @@ function changeEvent() {
 
 changeEvent();
 
+function showNotification() {
+    setInterval(()=> {
+        let currentTime = new Date().toLocaleTimeString().slice(0,-3);;
+        let timeArr = currentTime.split(':');
+        function getStart(timeArr) {   
+            let start = parseInt(timeArr[0])*60 + parseInt(timeArr[1]) - 480;
+            return start;
+        }
+    
+    
+        let start = getStart(timeArr);
+        arrayEvents.forEach(item => {
+            if (item.start == start) {
+                alert(`Event "${item.title}" has been started`);
+            }
+        })
+    },60000)
+}
+
+showNotification();
 
 
 
