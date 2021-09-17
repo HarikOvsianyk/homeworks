@@ -1,5 +1,9 @@
 'use strict';
-
+let btn2 = document.createElement('input');
+btn2.setAttribute('type', 'submit');
+btn2.setAttribute('id', 'btn2');
+btn2.setAttribute('value', 'Delete');
+btn2.setAttribute('class', 'addEvent__btn');
 
 let arrayEvents = [
     {start: 0, duration:15, title: "Exercise", color: '#E2ECF5'},
@@ -101,10 +105,8 @@ function formEvent() {
                 title: eventForm.value,
                 color: colorForm.value
             });
-            let btn2 = document.getElementById('btn2');
-            btn2.remove();
             form.reset();
-            
+            btn2.remove();
             cleanEvents();
             showNotification();
             renderCalendar();
@@ -132,11 +134,6 @@ function changeEvent() {
             label.innerText = 'Change your event';
             let btn = document.getElementById('btn');
             btn.setAttribute('value', 'Change event');
-            let btn2 = document.createElement('input');
-            btn2.setAttribute('type', 'submit');
-            btn2.setAttribute('id', 'btn2');
-            btn2.setAttribute('value', 'Delete');
-            btn2.setAttribute('class', 'addEvent__btn');
             form.append(btn2);
             let obj = arrayEvents.find(item => {
                 if (item.title == e.target.textContent) {
