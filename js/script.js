@@ -23,9 +23,14 @@ function renderCalendar() {
     let cards = Array.from(timeSlot).map(item => item.id);
 
     arrayEvents.forEach(item => {
-            cards.forEach(i => {
+            cards.forEach(i => {                
                 if (i == item.start) {
-                    createEvent(i,item);
+                    if(item.start%60) {
+                        
+                        createEventHalf(i,item);
+                    } else {  
+                        createEvent(i,item);
+                    }
                 }
         
                 if (i != item.start) {
@@ -33,11 +38,12 @@ function renderCalendar() {
                     let start = item.start - remainder;
                     let zIndex = 1;
                     if (i == start) {
-                        createEvent(i,item,remainder, zIndex);
+                        createEventDrop(i,item,remainder, zIndex);
                     }
                 }
             })
     })
+    changeEvent();
 }
 
 renderCalendar();
@@ -48,23 +54,69 @@ function createEvent (i,item,reminder = 0, zIndex = 0) {
     let event = card.querySelector('.card__event');
     let newEvent = document.createElement('div');
     newEvent.className = 'event';
-    newEvent.style.width = '100%';
-    newEvent.style.maxwidth = `200px`;
+    newEvent.style.width = '200px';
     newEvent.style.zIndex = zIndex;
+    newEvent.style.maxwidth = `200px`;
     newEvent.style.fontSize = '14px';
     newEvent.style.borderLeft = '2px solid #6E9ECF';
-    newEvent.style.height = `${item.duration*4}px`;
+    newEvent.style.height = `${item.duration*2}px`;
     newEvent.style.backgroundColor = item.color;
     newEvent.style.position = 'relative';
-    newEvent.style.top = `${reminder*4}px`;
+    newEvent.style.top = `${reminder*2}px`;
     newEvent.innerHTML = `<p class="event-text">${item.title}</p>`;
     newEvent.style.overflow = 'hidden';
+    newEvent.style.borderRadius = '10px';
+    event.append(newEvent);
+};
+
+
+function createEventHalf (i,item,reminder = 0, zIndex = 0) {
+    let card = document.getElementById(`${i}`);
+    let event = card.querySelector('.card__event-half');
+    let newEvent = document.createElement('div');
+    newEvent.className = 'event';
+    newEvent.style.width = '200px';
+    newEvent.style.zIndex = zIndex;
+    newEvent.style.maxwidth = `200px`;
+    newEvent.style.fontSize = '14px';
+    newEvent.style.borderLeft = '2px solid #6E9ECF';
+    newEvent.style.height = `${item.duration*2}px`;
+    newEvent.style.backgroundColor = item.color;
+    newEvent.style.position = 'relative';
+    newEvent.style.top = `${reminder*2}px`;
+    newEvent.innerHTML = `<p class="event-text">${item.title}</p>`;
+    newEvent.style.overflow = 'hidden';
+    newEvent.style.borderRadius = '10px';
+    event.append(newEvent);
+};
+
+function createEventDrop (i,item,reminder = 0, zIndex = 0) {
+    let card = document.getElementById(`${i}`);
+    let event = card.querySelector('.card__event-drop');
+    let newEvent = document.createElement('div');
+    newEvent.className = 'event';
+    newEvent.style.width = '200px';
+    newEvent.style.zIndex = zIndex;
+    newEvent.style.maxwidth = `200px`;
+    newEvent.style.fontSize = '14px';
+    newEvent.style.borderLeft = '2px solid #6E9ECF';
+    newEvent.style.height = `${item.duration*2}px`;
+    newEvent.style.backgroundColor = item.color;
+    newEvent.style.position = 'relative';
+    newEvent.style.top = `${reminder*2}px`;
+    newEvent.innerHTML = `<p class="event-text">${item.title}</p>`;
+    newEvent.style.overflow = 'hidden';
+    newEvent.style.borderRadius = '10px';
     event.append(newEvent);
 };
 
 function cleanEvents() {
     const cardsevent = document.querySelectorAll('.card__event');
     let arr = Array.from(cardsevent).forEach(item => item.innerHTML = '');
+    const cardsevent2 = document.querySelectorAll('.card__event-half');
+    let arr2 = Array.from(cardsevent2).forEach(item => item.innerHTML = '');
+    const cardsevent3 = document.querySelectorAll('.card__event-drop');
+    let arr3 = Array.from(cardsevent3).forEach(item => item.innerHTML = '');
 }
 
 function formEvent() {
@@ -117,7 +169,7 @@ function formEvent() {
 formEvent();
 
 function changeEvent() {
-    const cardsevent = document.querySelectorAll('.card__event');
+    const cardsevent = document.querySelectorAll('.event');
     let arr =  Array.from(cardsevent);
     arr.forEach(item => {
         item.addEventListener('click', (e) => {
