@@ -1,9 +1,6 @@
 'use strict';
 let btn2 = document.createElement('input');
-btn2.setAttribute('type', 'submit');
-btn2.setAttribute('id', 'btn2');
-btn2.setAttribute('value', 'Delete');
-btn2.setAttribute('class', 'addEvent__btn');
+
 
 let arrayEvents = [
     {start: 0, duration:15, title: "Exercise", color: '#E2ECF5'},
@@ -11,7 +8,7 @@ let arrayEvents = [
     {start: 30, duration:30, title: "Plan day", color:'#E2ECF5'},
     {start: 60, duration:15, title: "Review yesterday`s commits", color:'#E2ECF5'},
     {start: 100, duration:15, title: "Code review", color:'#E2ECF5'},
-    {start: 180, duration:90, title: "Have lunch with John", color:'#E2ECF5'},
+    {start: 180, duration:60, title: "Have lunch with John", color:'#E2ECF5'},
     {start: 360, duration:30, title: "Skype call", color:'#E2ECF5'},
     {start: 370, duration:45, title: "Follow up with designer", color:'#E2ECF5'},
     {start: 405, duration:30, title: "Push up branch", color:'#E2ECF5'},
@@ -26,10 +23,11 @@ function renderCalendar() {
             cards.forEach(i => {                
                 if (i == item.start) {
                     if(item.start%60) {
-                        
-                        createEventHalf(i,item);
+                        let selector = '.card__event-half';
+                        createEvent(i,item,selector);
                     } else {  
-                        createEvent(i,item);
+                        let selector = '.card__event';
+                        createEvent(i,item,selector);
                     }
                 }
         
@@ -38,7 +36,8 @@ function renderCalendar() {
                     let start = item.start - remainder;
                     let zIndex = 1;
                     if (i == start) {
-                        createEventDrop(i,item,remainder, zIndex);
+                        let selector = '.card__event-drop';
+                        createEvent(i,item,selector,remainder, zIndex);
                     }
                 }
             })
@@ -49,9 +48,9 @@ function renderCalendar() {
 renderCalendar();
 
 
-function createEvent (i,item,reminder = 0, zIndex = 0) {
+function createEvent (i,item,selector,reminder = 0, zIndex = 0) {
     let card = document.getElementById(`${i}`);
-    let event = card.querySelector('.card__event');
+    let event = card.querySelector(selector);
     let newEvent = document.createElement('div');
     newEvent.className = 'event';
     newEvent.style.width = '200px';
@@ -69,46 +68,6 @@ function createEvent (i,item,reminder = 0, zIndex = 0) {
     event.append(newEvent);
 };
 
-
-function createEventHalf (i,item,reminder = 0, zIndex = 0) {
-    let card = document.getElementById(`${i}`);
-    let event = card.querySelector('.card__event-half');
-    let newEvent = document.createElement('div');
-    newEvent.className = 'event';
-    newEvent.style.width = '200px';
-    newEvent.style.zIndex = zIndex;
-    newEvent.style.maxwidth = `200px`;
-    newEvent.style.fontSize = '14px';
-    newEvent.style.borderLeft = '2px solid #6E9ECF';
-    newEvent.style.height = `${item.duration*2}px`;
-    newEvent.style.backgroundColor = item.color;
-    newEvent.style.position = 'relative';
-    newEvent.style.top = `${reminder*2}px`;
-    newEvent.innerHTML = `<p class="event-text">${item.title}</p>`;
-    newEvent.style.overflow = 'hidden';
-    newEvent.style.borderRadius = '10px';
-    event.append(newEvent);
-};
-
-function createEventDrop (i,item,reminder = 0, zIndex = 0) {
-    let card = document.getElementById(`${i}`);
-    let event = card.querySelector('.card__event-drop');
-    let newEvent = document.createElement('div');
-    newEvent.className = 'event';
-    newEvent.style.width = '200px';
-    newEvent.style.zIndex = zIndex;
-    newEvent.style.maxwidth = `200px`;
-    newEvent.style.fontSize = '14px';
-    newEvent.style.borderLeft = '2px solid #6E9ECF';
-    newEvent.style.height = `${item.duration*2}px`;
-    newEvent.style.backgroundColor = item.color;
-    newEvent.style.position = 'relative';
-    newEvent.style.top = `${reminder*2}px`;
-    newEvent.innerHTML = `<p class="event-text">${item.title}</p>`;
-    newEvent.style.overflow = 'hidden';
-    newEvent.style.borderRadius = '10px';
-    event.append(newEvent);
-};
 
 function cleanEvents() {
     const cardsevent = document.querySelectorAll('.card__event');
@@ -186,6 +145,10 @@ function changeEvent() {
             label.innerText = 'Change your event';
             let btn = document.getElementById('btn');
             btn.setAttribute('value', 'Change event');
+            btn2.setAttribute('type', 'submit');
+            btn2.setAttribute('id', 'btn2');
+            btn2.setAttribute('value', 'Delete');
+            btn2.setAttribute('class', 'addEvent__btn');
             form.append(btn2);
             let obj = arrayEvents.find(item => {
                 if (item.title == e.target.textContent) {
@@ -195,6 +158,7 @@ function changeEvent() {
                 }
             });
             let start = obj.start;
+            console.log(obj.start);
             let minutes = start%30;
             let allminutes = (start - minutes) + 480;
             let leftOfminutes = allminutes%60;
